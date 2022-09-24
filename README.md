@@ -9,7 +9,7 @@
   <img height="100" height="auto" src="https://camo.githubusercontent.com/2597638ddcc6c96dbdca8baa3ccfd4ae1cb51f1617a89bdb17121c928e25f1b5/68747470733a2f2f6578702e6e6f64656973742e6e65742f6c6f676f732f69736c616d6963632e706e67">
 </p>
 
-# haqq node setup for mainnet — haqq_53211-1
+# haqq node setup for mainnet — haqq_54211-2
 
 Official documentation:
 >- https://github.com/haqq-network/validators-contest
