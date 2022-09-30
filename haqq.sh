@@ -58,7 +58,7 @@ fi
 echo -e "\e[1m\e[32m3. Downloading and building binaries... \e[0m" && sleep 1
 # download binary
 cd $HOME && \
-git clone -b v1.0.3 https://github.com/haqq-network/haqq && \
+git clone -b v1.1.0 https://github.com/haqq-network/haqq && \
 cd haqq && \
 make install
 
@@ -74,7 +74,7 @@ haqqd init $NODENAME --chain-id $HAQQ_CHAIN_ID
 rm -rf $HOME/.haqqd/config/genesis.json && cd $HOME/.haqqd/config/ && wget https://raw.githubusercontent.com/haqq-network/validators-contest/master/genesis.json
 
 # PEER
-peers="0833039f717227ccd156d156ea772746b8ac6d71@146.19.24.139:42656"; \
+peers="5aa25d2e0c3fdc00c0a9738ba0bb6cce2ef902a2@15.235.40.222:12656"; \
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.haqqd/config/config.toml
 
 # State Sync
