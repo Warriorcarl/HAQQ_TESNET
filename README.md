@@ -62,7 +62,23 @@ sudo rm -rf $HOME/.haqqd/data/tx_index.db
 ### (OPTIONAL) State Sync
 You can state sync your node in minutes by running commands below
 ```
-N/A
+peers="5aa25d2e0c3fdc00c0a9738ba0bb6cce2ef902a2@15.235.40.222:12656"; \
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.haqqd/config/config.toml
+
+SNAP_RPC="https://haqq.t.rpc.nodewarrior.dev:443"; \
+LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
+TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash); \
+echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
+
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.haqqd/config/config.toml
+
+sudo systemctl stop haqqd && \
+haqqd tendermint unsafe-reset-all --home ~/.haqqd && \
+sudo systemctl restart haqqd
 ```
 
 ### Create wallet
