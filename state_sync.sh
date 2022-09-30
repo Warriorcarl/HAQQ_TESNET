@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SNAP_RPC="http://146.19.24.139:42657"; \
+SNAP_RPC="https://haqq.t.rpc.nodewarrior.dev:443"; \
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash); \
